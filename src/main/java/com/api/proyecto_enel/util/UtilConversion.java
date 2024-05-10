@@ -3,9 +3,11 @@ package com.api.proyecto_enel.util;
 import com.api.proyecto_enel.model.DTO.AdminDTO;
 import com.api.proyecto_enel.model.DTO.EmpresaDTO;
 import com.api.proyecto_enel.model.DTO.ClienteDTO;
+import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Admin;
 import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.model.entity.Cliente;
+import org.springframework.http.ResponseEntity;
 
 public class UtilConversion {
     // Método para convertir un EmpresaDTO a una entidad Empresa
@@ -39,7 +41,7 @@ public class UtilConversion {
     }
 
     // Método para convertir un ClienteDTO a una entidad Cliente
-    public static Cliente toCliente(ClienteDTO clienteDTO) {
+    public static ResponseEntityDTO toCliente(ClienteDTO clienteDTO) {
         Cliente cliente = new Cliente();
         cliente.setId(clienteDTO.getId());
         cliente.setIdRol(clienteDTO.getIdRol());
@@ -50,7 +52,7 @@ public class UtilConversion {
         cliente.setRutCli(clienteDTO.getRutCli());
         cliente.setCelularCli(clienteDTO.getCelularCli());
         cliente.setDireccionCli(clienteDTO.getDireccionCli());
-        return cliente;
+        return new ResponseEntityDTO("CLIENTE GUARDADO","200");
     }
     // Método para convertir una entidad Cliente a un ClienteDTO
     public static ClienteDTO fromCliente(Cliente cliente) {
