@@ -3,11 +3,10 @@ import com.api.proyecto_enel.model.DTO.ClienteDTO;
 import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.repository.IClienteRepository;
-import com.api.proyecto_enel.util.CorreoValidation;
-import com.api.proyecto_enel.util.RutValidation;
-import com.api.proyecto_enel.util.StringValidation;
+import com.api.proyecto_enel.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.api.proyecto_enel.util.ValidacionPorCampo.*;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -43,34 +42,6 @@ public class ClienteService {
     }
     //falta verificar rango (por ejemplo, edad desde 18 a 150 años) y longitud del campo (en nombres y contrasenas)
 
-    public static Boolean validacionPorCampo(String nombreCampoString, String campoEntregadoString) {
-        //Validacion campos nombre y apellido
-        if (nombreCampoString.equals("nombreCli") || nombreCampoString.equals("apellidoCli")) {
-            Boolean result = StringValidation.IsOnlyAlphabetic(campoEntregadoString);
-            if (result == true) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (nombreCampoString.equals("rutCli")) {
-            Boolean result = RutValidation.validacionModule11(campoEntregadoString);
-            System.out.println("rut es igual:  " + result);
-            if (result == false) {
-                return false;
-            } else {
-                return true;
-            }
-        } else if (nombreCampoString.equals("correoCli")) {
-            Boolean result = CorreoValidation.validacionCorreo(campoEntregadoString);
-            if (result == false) {
-                return false;
-            } else {
-                return true;
-            }
-        }else{
-            return true;
-        }
-    }
 
     public ResponseEntityDTO saveCliente(ClienteDTO clienteDTO) {
         try {
@@ -105,7 +76,7 @@ public class ClienteService {
                             if(campoNuloOrEmpty==true){
                                 System.out.println("Campo nulo o vacio");
                             }else{
-                                Boolean campoValidado = validacionPorCampo(nombreCampoString, campoEntregadoString);
+                                Boolean campoValidado = ValidacionPorCampo.validacionPorCampo(nombreCampoString, campoEntregadoString);
                                 if(campoValidado==true){
                                     System.out.println("Campo correcto");
                                 }else{
@@ -131,6 +102,7 @@ public class ClienteService {
 
             }
             return new ResponseEntityDTO("holi desde try service", "400");
+
         }catch(Exception e){
             return new ResponseEntityDTO("mal", "400");}
     }
