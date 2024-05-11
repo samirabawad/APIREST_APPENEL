@@ -1,6 +1,5 @@
 package com.api.proyecto_enel.model.DTO;
 
-import com.api.proyecto_enel.model.entity.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

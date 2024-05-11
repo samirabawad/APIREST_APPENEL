@@ -7,7 +7,6 @@ import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Admin;
 import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.model.entity.Cliente;
-import org.springframework.http.ResponseEntity;
 
 public class UtilConversion {
     // Método para convertir un EmpresaDTO a una entidad Empresa

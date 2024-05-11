@@ -5,18 +5,8 @@ import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.service.ClienteService;
 import com.api.proyecto_enel.util.UtilConversion;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
-import springfox.documentation.spring.web.json.Json;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-
-import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -62,28 +52,10 @@ public class ClienteController {
         return cliente.map(UtilConversion::fromCliente).orElse(null);
     }
 
+    //crea un cliente
     @PostMapping("/crear")
     public ResponseEntityDTO saveCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
             ResponseEntityDTO cliente = clienteService.saveCliente(clienteDTO);
             return cliente;
     }
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-  //  @ExceptionHandler(MethodArgumentNotValidException.class)
-  //  public ResponseEntityDTO handleValidationExceptions(MethodArgumentNotValidException ex) {
-    //    System.out.println("Handling method argument not valid exception");
-      //  return new ResponseEntityDTO("manejando error", "400");
-   // }
-//    @PostMapping("/crear")
-  //  public ResponseEntityDTO saveCliente(@RequestBody String json) {
-  //      try {
-    //        ResponseEntityDTO cliente = clienteService.saveCliente(json);
-      //      return cliente;
-    //    }
-   //     catch (Exception ex) {
-     //       ex.printStackTrace();
-       //     //+ex.getMessage();
-         //   return new ResponseEntityDTO("Se ha producido un error al intentar crear el cliente, intente mas tarde"+ex, "400");
-     //   }
-  //  }
-
 }
