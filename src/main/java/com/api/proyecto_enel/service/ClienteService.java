@@ -110,6 +110,6 @@ public class ClienteService {
             return new ResponseEntityDTO("Cliente guardado", "200");
 
         }catch(Exception e){
-            return new ResponseEntityDTO("El nombre del campo enviado, no coincide con ninguno de nuestra app", "400");}
+            return new ResponseEntityDTO("Error al leer los campos. Compruebe que el nombre de los campos sea el correcto", "400");}
     }
 }

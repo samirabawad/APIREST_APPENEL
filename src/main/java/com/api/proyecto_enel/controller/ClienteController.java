@@ -5,6 +5,7 @@ import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.service.ClienteService;
 import com.api.proyecto_enel.util.UtilConversion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
@@ -54,8 +55,11 @@ public class ClienteController {
 
     //crea un cliente
     @PostMapping("/crear")
-    public ResponseEntityDTO saveCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntityDTO saveCliente(@Valid @RequestBody ClienteDTO clienteDTO, BindingResult resultado) {
             ResponseEntityDTO cliente = clienteService.saveCliente(clienteDTO);
+            if(resultado.hasErrors()){
+                return new ResponseEntityDTO("holi, error", "400");
+            }
             return cliente;
     }
 }
