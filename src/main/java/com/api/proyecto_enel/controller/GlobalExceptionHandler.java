@@ -24,8 +24,10 @@ public class GlobalExceptionHandler{
                                                              HttpHeaders headers,
                                                              HttpStatus status,
                                                              WebRequest request) {
-        return ResponseEntity.status(status).body(ex.getMessage());
-    }
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setMensaje("El objeto es nulo.");
+        errorDTO.setCodigoError(String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        return ResponseEntity.status(status).body(errorDTO);    }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex,

@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class CelularValidation {
     //validacion de numero de celular chileno
     public static Boolean ValidateCelular(String celular){
-        String regex = "^(\\+569|9)?\\s?\\d{8}";
+        String regex = "^(\\+)?(569|9)?\\s?\\d{8}";
         Pattern pattern = Pattern.compile(regex);
         //compara patron de regex con el celular recibido
         Matcher matcher = pattern.matcher(celular);

@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 public class CorreoValidation {
     public static boolean validacionCorreo(String correo) {
         // Expresión regex que verifica el formato del correo electrónico
-        String regx = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        String regx = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}$";
         Pattern pattern = Pattern.compile(regx);
 
         // Create instance of matcher

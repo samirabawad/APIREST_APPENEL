@@ -5,8 +5,7 @@ import java.util.regex.Pattern;
 
 public class ClaveValidation {
     public static Boolean ClaveValidate(String claveCli){
-
-        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$";
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=\\.])(?=\\S+$).{8,16}$";
         Pattern pattern = Pattern.compile(regex);
         // Create instance of matcher
         Matcher matcher = pattern.matcher(claveCli);

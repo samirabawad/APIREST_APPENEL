@@ -8,60 +8,64 @@ package com.api.proyecto_enel.util;
 
 public class RutValidation {
 
-    //Funcion principal que valida y verifica RUT en base al modulo 11.
-    public static Boolean validacionModule11(String rut) {
-        // Formatea RUT: elimina puntos y guiones, convierte k en mayuscula.
-        if(rut.contains("[.\\-]")){
-            rut = rut.replaceAll("[.\\-]", "").toUpperCase();
-        }else{
-            return false;
-        }
-        //Se separa el RUT.
-        //Obtiene RUT.
-        String numeroRUT = rut.substring(0, rut.length() - 1);
-        //Obtiene DV
-        String dv = rut.substring(rut.length() - 1);
+    public static String validaFormato( String rut) {
+        //Elimina puntos y guiones del formato original
+        String rutSinFormato = rut.replaceAll("[.-]", "");
+        System.out.println("rutSinFormato2: "+rutSinFormato); //209807602
 
-        //Valida rut y verifica con Modulo 11
-        Boolean rutValidado = ValidaRutEnviado(numeroRUT, dv);
-        if(rutValidado==false) {
-            return false;
-        }else{
-
-            //Obtiene DV del Modulo 11.
-            String dvEsperado = calcularDigitoVerificadorEsperado(numeroRUT);
-            //Compara DV de Modulo 11 con el proporcionado.
-            System.out.println("dvEsperado:"+dvEsperado+ "dv entregado: "+dv);
-            if(dvEsperado.equals("igual")){
-                return true;
-            }else if(dvEsperado.equals("0") && dv.equals("0")){
-                return true;
-            }else if(dvEsperado.equals("K") && dv.equals("K")){
-                return true;
-            }else{
-                return false;
-            }
-        }
-    }
-
-    //Valida formato de RUT enviado.
-    public static Boolean ValidaRutEnviado(String numeroRUT, String dv) {
-        //valida numeroRUT
-        if (StringValidation.IsOnlyNumeric(numeroRUT) == false) {
-            return false;
-        } else {
-            //Valida DV
-            if (StringValidation.IsOnlyNumeric(dv) == false) {
-                if (dv.equals("K") == false) {
-                    return false;
-                } else {
-                    return true;
-                }
+        //Verifica si el RUT tiene el formato correcto (7-8 dígitos y un dígito verificador)
+        if (rutSinFormato.matches("\\d{7,9}[0-9kK]")) {
+            System.out.println("Primer if matches con regex");
+            //Verifica longitud mínima y máxima del RUT
+            if (rutSinFormato.length() >= 8 && rutSinFormato.length() <= 9) {
+                //Agrega puntos y guion al formato deseado
+                System.out.println("rut valido");
+                return "rut valido";
             } else {
-                return true;
+                System.out.println("el rut debe tener entre 7 y 8 digitos");
+                return "El RUT debe tener entre 8 y 9 dígitos.";
             }
+        } else {
+            System.out.println("El RUT no tiene el formato valido");
+            return "El RUT no tiene el formato válido. Debe tener puntos, guion y digito verificador";
         }
     }
+    //Funcion principal que valida y verifica RUT en base al modulo 11.
+    public static String validacionModule11(String rut) {
+        String validacionFormato = validaFormato(rut);
+        if (validacionFormato.equals("rut valido")) {
+            System.out.println("en validacionmodulo11, primer if equals");
+            String rutSinFormato = rut.replaceAll("[.-]", "");
+            System.out.println("rutSinFormato en validacionmodulo11: "+rutSinFormato); //209807602
+
+            //Se separa el RUT.
+            //Obtiene RUT.
+            String numeroRUT = rutSinFormato.substring(0, rutSinFormato.length() - 1);
+            System.out.println("numeroRUT en validacionmodulo11: "+numeroRUT);
+            //Obtiene DV
+            String dv = rutSinFormato.substring(rutSinFormato.length() - 1);
+            System.out.println("dv en validacionmodulo11: "+dv);
+
+                //Obtiene DV del Modulo 11.
+                String dvEsperado = calcularDigitoVerificadorEsperado(numeroRUT);
+                //Compara DV de Modulo 11 con el proporcionado.
+                System.out.println("dvEsperado:" + dvEsperado + "dv entregado: " + dv);
+                if (dvEsperado.equals("igual")) {
+                    return "RUT valido";
+                } else if (dvEsperado.equals("0") && dv.equals("0")) {
+                    return "RUT valido";
+                } else if (dvEsperado.equals("K") && dv.equals("K")) {
+                    return "RUT valido";
+                } else {
+                    return "RUT invalido";
+                }
+            }
+        else{
+            System.out.println("caigo en el else de el rut no tiene un formato valido"); //209807602
+            return "El RUT no tiene el formato valido. "+validacionFormato;
+        }
+    }
+
 
     //Calculo DV en base a RUT preparado con modulo 11
     public static String calcularDigitoVerificadorEsperado(String numeroRUT) {
