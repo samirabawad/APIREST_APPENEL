@@ -9,29 +9,21 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmpresaDTO {
-    //@NotNull (este si validar que no sean letras)
+
     private Integer id;
-    //@NotNull(message = "Id no debe ser nulo")
-    private Integer idRol;
 
-    //@NotNull(message = "nombre no debe ser nulo")
-    private String nombreEmpresa;
+    private Integer idrol;
 
-    //@NotNull(message = "apellido no debe ser nulo")
-    private String apellidoEmpresa;
+    private String rut_empresa;
 
-    //@NotNull(message = "correo no debe ser nulo")
-    private String correoEmpresa;
+    private String nombre_empresa;
 
-    //@NotNull(message = "clave no debe ser nula")
-    private String claveEmpresa;
+    private String giro_empresa;
 
-    //@NotNull(message = "Run no debe ser nulo")
-    private String runEmpresa;
+    private String correo_empresa;
 
-    //@NotNull(message = "Celular no debe ser nulo")
-    private String celularEmpresa;
+    private String clave_empresa;
 
-    @NotNull(message = "direccion no debe ser nulo")
-    private String direccionEmpresa;
+    private String celular_empresa;
+
 }

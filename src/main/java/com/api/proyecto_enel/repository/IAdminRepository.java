@@ -15,6 +15,6 @@ public interface IAdminRepository extends JpaRepository<Admin, Integer> {
     @Override
     List<Admin> findAllById(Iterable<Integer> integers);
 
-    Optional<Admin> findAdminByRutAdmin(String rutAdmin);
-    Optional<Admin> findAdminBycorreoAdmin(String correoAdmin);
+    //Optional<Admin> findAdminByRutAdmin(String rutAdmin);
+    //Optional<Admin> findAdminBycorreoAdmin(String correoAdmin);
 }

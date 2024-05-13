@@ -2,7 +2,6 @@ package com.api.proyecto_enel.service;
 
 import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.model.entity.Rol;
-import com.api.proyecto_enel.repository.IClienteRepository;
 import com.api.proyecto_enel.repository.IRolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

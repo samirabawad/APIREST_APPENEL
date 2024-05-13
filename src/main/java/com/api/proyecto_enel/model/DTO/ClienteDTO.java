@@ -16,43 +16,22 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClienteDTO {
-    //@NotNull (este si validar que no sean letras)
+
     private Integer id;
 
-    //@NotNull(message="idRol no debe ser nulo")
-    //@Min(value = 1, message ="el valor debe ser de una longitud min 1" )
-    //@Max(value = 1, message = "el valor debe ser de una longitud max 1")
-    //@Size(max = 1)
-    //@NotEmpty(message = "no vacio")
-   // @Pattern(regexp = "^[0-9]+$", message = "El idRol debe ser un número entero")
-    private Integer idRol;
+    @NotNull(message= "no debe ser nulo")
+    private Integer idrol;
 
-    @NotNull(message="nombre no debe ser nulo")
-    @Size(min = 2, max = 4,message="debe tener un max de 4 caracteres")
-    private String nombreCli;
+    private String rut;
 
-    //@NotNull(message="apellido no debe ser nulo")
-    private String apellidoCli;
+    private String nombre;
 
-    //@NotNull(message="correo no debe ser nulo")
-    private String correoCli;
+    private String apellido;
 
-    //@NotNull(message="clave no debe ser nula")
-    private String claveCli;
+    private String correo;
 
-    //@NotNull(message="rut no debe ser nulo")
-    private String rutCli;
+    private String clave;
 
-    //@NotNull(message="celular no debe ser nulo")
-    private String celularCli;
+    private String celular;
 
-    //@NotNull(message="direccion no debe ser nulo")
-    private String direccionCli;
-
-
-    public Set<ConstraintViolation<ClienteDTO>> validars(){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        return validator.validate(this);
-    }
 }

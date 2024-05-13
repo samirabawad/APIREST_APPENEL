@@ -10,30 +10,20 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdminDTO {
-     //@NotNull (este si validar que no sean letras)
+
      private Integer id;
 
-     //@NotNull(message="idRol no debe ser nulo")
-     private Integer idRol;
+     private Integer idrol;
 
-     //@NotNull(message="nombre no debe ser nulo")
-     private String nombreAdmin;
+     private String rut_admin;
 
-     //@NotNull(message="apellido no debe ser nulo")
-     private String apellidoAdmin;
+     private String nombre_admin;
 
-     //@NotNull(message="correo no debe ser nulo")
-     private String correoAdmin;
+     private String apellido_admin;
 
-     //@NotNull(message="clave no debe ser nula")
-     private String claveAdmin;
+     private String correo_admin;
 
-     //@NotNull(message="rut no debe ser nulo")
-     private String rutAdmin;
+     private String clave_admin;
 
-     //@NotNull(message="celular no debe ser nulo")
-     private String celularAdmin;
-
-     //@NotNull(message="direccion no debe ser nulo")
-     private String direccionAdmin;
+     private String celular_admin;
 }

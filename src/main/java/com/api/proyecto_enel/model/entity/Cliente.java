@@ -1,64 +1,53 @@
 package com.api.proyecto_enel.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.*;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "cliente", uniqueConstraints = {
-        @UniqueConstraint(name = "cliente_correo_cli_key", columnNames = {"correo_cli"}),
-        @UniqueConstraint(name = "cliente_rut_cli_key", columnNames = {"rut_cli"})
+        @UniqueConstraint(name = "cliente_rut_cliente_key", columnNames = {"rut_cliente"}),
+        @UniqueConstraint(name = "cliente_correo_cliente_key", columnNames = {"correo_cliente"})
 })
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('cliente_id_cli_seq'")
-    @Column(name = "id_cli", nullable = false)
-    @NotNull(message="idRol no debe ser nulo")
-    @Pattern(regexp = "^[0-9]+$", message = "El idRol debe ser un número entero")
-    @Min(value = 1, message ="el valor debe ser de una longitud min 1" )
-    @Max(value = 1, message = "el valor deve ser de una longitud max 1")
+    @ColumnDefault("nextval('cliente_id_cliente_seq'")
+    @Column(name = "id_cliente", nullable = false)
     private Integer id;
 
-    @ColumnDefault("2")
-    @JoinColumn(name = "id_rol", nullable = false)
-    @NotNull(message="idRol no debe ser nulo")
-    @Min(value = 1, message ="el valor debe ser de una longitud min 1" )
-    @Max(value = 1, message = "el valor deve ser de una longitud max 1")
-    @Size(max = 1)
-    @NotEmpty(message = "no vacio")
-    @Pattern(regexp = "^[0-9]+$", message = "El idRol debe ser un número entero")
-    private Integer idRol;
+    @NotNull
+    @ColumnDefault("1")
+    @JoinColumn(name = "idrol", nullable = false)
+    private Integer idrol;
 
-    @Column(name = "nombre_cli", length = 50)
-    private String nombreCli;
+    @Size(max = 12)
+    @Column(name = "rut_cliente", length = 12)
+    private String rut_cliente;
 
-    @Column(name = "apellido_cli", length = 50)
-    private String apellidoCli;
+    @Size(max = 50)
+    @Column(name = "nombre_cliente", length = 50)
+    private String nombre_cliente;
 
-    @Column(name = "correo_cli", length = 100)
-    private String correoCli;
+    @Size(max = 50)
+    @Column(name = "apellido_cliente", length = 50)
+    private String apellido_cliente;
 
-    @Column(name = "clave_cli", length = 100)
-    private String claveCli;
+    @Size(max = 100)
+    @Column(name = "correo_cliente", length = 100)
+    private String correo_cliente;
 
-    @Column(name = "rut_cli", length = 12)
-    private String rutCli;
+    @Size(max = 100)
+    @Column(name = "clave_cliente", length = 100)
+    private String clave_cliente;
 
-    @Column(name = "celular_cli", length = 15)
-    private String celularCli;
-
-    @Column(name = "direccion_cli", length = 100)
-    private String direccionCli;
-
+    @Size(max = 15)
+    @Column(name = "celular_cliente", length = 15)
+    private String celular_cliente;
 
 }

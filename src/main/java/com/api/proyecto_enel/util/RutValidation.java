@@ -11,8 +11,11 @@ public class RutValidation {
     //Funcion principal que valida y verifica RUT en base al modulo 11.
     public static Boolean validacionModule11(String rut) {
         // Formatea RUT: elimina puntos y guiones, convierte k en mayuscula.
-        rut = rut.replaceAll("[.\\-]", "").toUpperCase();
-
+        if(rut.contains("[.\\-]")){
+            rut = rut.replaceAll("[.\\-]", "").toUpperCase();
+        }else{
+            return false;
+        }
         //Se separa el RUT.
         //Obtiene RUT.
         String numeroRUT = rut.substring(0, rut.length() - 1);

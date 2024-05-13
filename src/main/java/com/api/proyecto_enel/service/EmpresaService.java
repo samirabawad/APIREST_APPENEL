@@ -28,13 +28,13 @@ public class EmpresaService {
     }
 
     //Obtiene una empresa por el RUN.
-    public Optional<Empresa> getEmpresaByRun(String run_empresa){
-        return empresaRepository.findEmpresaByRunEmpresa(run_empresa);
-    }
+    //public Optional<Empresa> getEmpresaByRun(String run_empresa){
+      //  return empresaRepository.findEmpresaByRunEmpresa(run_empresa);
+   // }
 
     //Obtiene una empresa por el Correo.
-    public Optional<Empresa> getEmpresaByCorreo(String correo_empresa){
-        return empresaRepository.findEmpresaByCorreoEmpresa(correo_empresa);
-    }
+   // public Optional<Empresa> getEmpresaByCorreo(String correo_empresa){
+     //   return empresaRepository.findEmpresaByCorreoEmpresa(correo_empresa);
+    //}
 
 }

@@ -1,6 +1,5 @@
 package com.api.proyecto_enel.controller;
 
-import com.api.proyecto_enel.model.DTO.ClienteDTO;
 import com.api.proyecto_enel.model.DTO.EmpresaDTO;
 import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.model.entity.Empresa;
@@ -44,17 +43,17 @@ public class EmpresaController {
     }
 
     //Obtiene una empresa por el Run.
-    @GetMapping("getEmpresa/{run_empresa}")
-    public EmpresaDTO getEmpresaByRun(@PathVariable("run_empresa") String run_empresa) {
-        Optional <Empresa> empresa = empresaService.getEmpresaByRun(run_empresa);
-        return empresa.map(UtilConversion::fromEmpresa).orElse(null);
-    }
+  //  @GetMapping("getEmpresa/{run_empresa}")
+    //public EmpresaDTO getEmpresaByRun(@PathVariable("run_empresa") String run_empresa) {
+      //  Optional <Empresa> empresa = empresaService.getEmpresaByRun(run_empresa);
+        //return empresa.map(UtilConversion::fromEmpresa).orElse(null);
+   // }
 
     //Obtiene una empresa por el Correo.
-    @GetMapping("getEmpresa/{correo_empresa}")
-    public EmpresaDTO getEmpresaByCorreo(@PathVariable("correo_empresa") String correo_empresa){
-        Optional<Empresa> empresa = empresaService.getEmpresaByCorreo(correo_empresa);
-        return empresa.map(UtilConversion::fromEmpresa).orElse(null);
-    }
+    //@GetMapping("getEmpresa/{correo_empresa}")
+   // public EmpresaDTO getEmpresaByCorreo(@PathVariable("correo_empresa") String correo_empresa){
+     //   Optional<Empresa> empresa = empresaService.getEmpresaByCorreo(correo_empresa);
+       // return empresa.map(UtilConversion::fromEmpresa).orElse(null);
+    //}
 
 }

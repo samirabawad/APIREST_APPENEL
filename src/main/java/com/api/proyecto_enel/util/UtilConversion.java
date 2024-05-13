@@ -5,22 +5,21 @@ import com.api.proyecto_enel.model.DTO.EmpresaDTO;
 import com.api.proyecto_enel.model.DTO.ClienteDTO;
 import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Admin;
-import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.model.entity.Cliente;
+import com.api.proyecto_enel.model.entity.Empresa;
 
 public class UtilConversion {
     // Método para convertir un EmpresaDTO a una entidad Empresa
     public static Empresa toEmpresa(EmpresaDTO empresaDTO) {
         Empresa empresa = new Empresa();
         empresa.setId(empresaDTO.getId());
-        empresa.setIdRol(empresaDTO.getIdRol());
-        empresa.setNombreEmpresa(empresaDTO.getNombreEmpresa());
-        empresa.setApellidoEmpresa(empresaDTO.getApellidoEmpresa());
-        empresa.setCorreoEmpresa(empresaDTO.getCorreoEmpresa());
-        empresa.setClaveEmpresa(empresaDTO.getClaveEmpresa());
-        empresa.setRunEmpresa(empresaDTO.getRunEmpresa());
-        empresa.setCelularEmpresa(empresaDTO.getCelularEmpresa());
-        empresa.setDireccionEmpresa(empresaDTO.getDireccionEmpresa());
+        empresa.setIdrol(empresaDTO.getIdrol());
+        empresa.setRut_empresa(empresaDTO.getRut_empresa());
+        empresa.setNombre_empresa(empresaDTO.getNombre_empresa());
+        empresa.setGiro_empresa(empresaDTO.getGiro_empresa());
+        empresa.setCorreo_empresa(empresaDTO.getCorreo_empresa());
+        empresa.setClave_empresa(empresaDTO.getClave_empresa());
+        empresa.setCelular_empresa(empresaDTO.getCelular_empresa());
         return empresa;
     }
 
@@ -28,14 +27,13 @@ public class UtilConversion {
     public static EmpresaDTO fromEmpresa(Empresa empresa) {
         return new EmpresaDTO(
                 empresa.getId(),
-                empresa.getIdRol(),
-                empresa.getNombreEmpresa(),
-                empresa.getApellidoEmpresa(),
-                empresa.getCorreoEmpresa(),
-                empresa.getClaveEmpresa(),
-                empresa.getRunEmpresa(),
-                empresa.getCelularEmpresa(),
-                empresa.getDireccionEmpresa()
+                empresa.getIdrol(),
+                empresa.getRut_empresa(),
+                empresa.getNombre_empresa(),
+                empresa.getGiro_empresa(),
+                empresa.getCorreo_empresa(),
+                empresa.getClave_empresa(),
+                empresa.getCelular_empresa()
         );
     }
 
@@ -43,28 +41,27 @@ public class UtilConversion {
     public static ResponseEntityDTO toCliente(ClienteDTO clienteDTO) {
         Cliente cliente = new Cliente();
         cliente.setId(clienteDTO.getId());
-        cliente.setIdRol(clienteDTO.getIdRol());
-        cliente.setNombreCli(clienteDTO.getNombreCli());
-        cliente.setApellidoCli(clienteDTO.getApellidoCli());
-        cliente.setCorreoCli(clienteDTO.getCorreoCli());
-        cliente.setClaveCli(clienteDTO.getClaveCli());
-        cliente.setRutCli(clienteDTO.getRutCli());
-        cliente.setCelularCli(clienteDTO.getCelularCli());
-        cliente.setDireccionCli(clienteDTO.getDireccionCli());
+        cliente.setIdrol(clienteDTO.getIdrol());
+        cliente.setRut_cliente(clienteDTO.getRut());
+        cliente.setNombre_cliente(clienteDTO.getNombre());
+        cliente.setApellido_cliente(clienteDTO.getApellido());
+        cliente.setCorreo_cliente(clienteDTO.getCorreo());
+        cliente.setClave_cliente(clienteDTO.getClave());
+        cliente.setCelular_cliente(clienteDTO.getCelular());
         return new ResponseEntityDTO("CLIENTE GUARDADO","200");
     }
+
     // Método para convertir una entidad Cliente a un ClienteDTO
     public static ClienteDTO fromCliente(Cliente cliente) {
         return new ClienteDTO(
                 cliente.getId(),
-                cliente.getIdRol(),
-                cliente.getNombreCli(),
-                cliente.getApellidoCli(),
-                cliente.getCorreoCli(),
-                cliente.getClaveCli(),
-                cliente.getRutCli(),
-                cliente.getCelularCli(),
-                cliente.getDireccionCli()
+                cliente.getIdrol(),
+                cliente.getRut_cliente(),
+                cliente.getNombre_cliente(),
+                cliente.getApellido_cliente(),
+                cliente.getCorreo_cliente(),
+                cliente.getClave_cliente(),
+                cliente.getCelular_cliente()
         );
     }
 
@@ -72,14 +69,13 @@ public class UtilConversion {
     public static Admin toAdmin(AdminDTO adminDTO) {
         Admin admin = new Admin();
         admin.setId(adminDTO.getId());
-        admin.setIdRol(adminDTO.getIdRol());
-        admin.setNombreAdmin(adminDTO.getNombreAdmin());
-        admin.setApellidoAdmin(adminDTO.getApellidoAdmin());
-        admin.setCorreoAdmin(adminDTO.getCorreoAdmin());
-        admin.setClaveAdmin(adminDTO.getClaveAdmin());
-        admin.setRutAdmin(adminDTO.getRutAdmin());
-        admin.setCelularAdmin(adminDTO.getCelularAdmin());
-        admin.setDireccionAdmin(adminDTO.getDireccionAdmin());
+        admin.setIdrol(adminDTO.getIdrol());
+        admin.setRut_admin(adminDTO.getRut_admin());
+        admin.setNombre_admin(adminDTO.getNombre_admin());
+        admin.setApellido_admin(adminDTO.getApellido_admin());
+        admin.setCorreo_admin(adminDTO.getCorreo_admin());
+        admin.setClave_admin(adminDTO.getClave_admin());
+        admin.setCelular_admin(adminDTO.getCelular_admin());
         return admin;
     }
 
@@ -87,14 +83,13 @@ public class UtilConversion {
     public static AdminDTO fromAdmin(Admin admin) {
         return new AdminDTO(
                 admin.getId(),
-                admin.getIdRol(),
-                admin.getNombreAdmin(),
-                admin.getApellidoAdmin(),
-                admin.getCorreoAdmin(),
-                admin.getClaveAdmin(),
-                admin.getRutAdmin(),
-                admin.getCelularAdmin(),
-                admin.getDireccionAdmin()
+                admin.getIdrol(),
+                admin.getRut_admin(),
+                admin.getNombre_admin(),
+                admin.getApellido_admin(),
+                admin.getCorreo_admin(),
+                admin.getClave_admin(),
+                admin.getCelular_admin()
         );
     }
 }

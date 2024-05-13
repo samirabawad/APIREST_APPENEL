@@ -1,11 +1,8 @@
 package com.api.proyecto_enel.controller;
 
 import com.api.proyecto_enel.model.DTO.AdminDTO;
-import com.api.proyecto_enel.model.DTO.EmpresaDTO;
 import com.api.proyecto_enel.model.entity.Admin;
-import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.service.AdminService;
-import com.api.proyecto_enel.service.EmpresaService;
 import com.api.proyecto_enel.util.UtilConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,17 +43,17 @@ public class AdminController {
     }
 
     //Obtiene un admin por el Rut.
-    @GetMapping("getAdminRut/{rut_admin}")
-    public AdminDTO getAdminByRut(@PathVariable("rut_admin") String rut_admin) {
-        Optional<Admin> admin = adminService.getAdminByRut(rut_admin);
-        return admin.map(UtilConversion::fromAdmin).orElse(null);
-    }
+    //@GetMapping("getAdminRut/{rut_admin}")
+    //public AdminDTO getAdminByRut(@PathVariable("rut_admin") String rut_admin) {
+      //  Optional<Admin> admin = adminService.getAdminByRut(rut_admin);
+       // return admin.map(UtilConversion::fromAdmin).orElse(null);
+    //}
 
     //Obtiene un admin por el Correo.
-    @GetMapping("getAdminCorreo/{correo_admin}")
-    public AdminDTO getAdminByCorreo(@PathVariable("correo_admin") String correo_admin){
-        Optional<Admin> admin = adminService.getAdminByCorreo(correo_admin);
-        return admin.map(UtilConversion::fromAdmin).orElse(null);
-    }
+   // @GetMapping("getAdminCorreo/{correo_admin}")
+   // public AdminDTO getAdminByCorreo(@PathVariable("correo_admin") String correo_admin){
+       // Optional<Admin> admin = adminService.getAdminByCorreo(correo_admin);
+     //   return admin.map(UtilConversion::fromAdmin).orElse(null);
+  //  }
 
 }

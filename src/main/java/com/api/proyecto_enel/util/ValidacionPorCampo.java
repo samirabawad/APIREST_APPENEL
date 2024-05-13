@@ -1,46 +1,47 @@
 package com.api.proyecto_enel.util;
 
+import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
+
 public class ValidacionPorCampo {
-    public static Boolean validacionPorCampo(String nombreCampoString, String campoEntregadoString) {
+    public static String validacionPorCampo(String nombreCampoString, String campoEntregadoString) {
         //Validacion campos nombre y apellido
-        if (nombreCampoString.equals("nombreCli") || nombreCampoString.equals("apellidoCli")) {
+        if (nombreCampoString.equals("nombre") || nombreCampoString.equals("apellido")) {
             Boolean result = StringValidation.IsOnlyAlphabetic(campoEntregadoString);
             if (result == true) {
-                return true;
+                return "Campo correcto";
             } else {
-                return false;
+                return "El nombre debe tener solo letras";
             }
-        } else if (nombreCampoString.equals("rutCli")) {
+        } else if (nombreCampoString.equals("rut")) {
             Boolean result = RutValidation.validacionModule11(campoEntregadoString);
-            System.out.println("rut es igual:  " + result);
-            if (result == false) {
-                return false;
+            if (result == true) {
+                return "Campo correcto";
             } else {
-                return true;
+                return "El rut no es valido";
             }
-        } else if (nombreCampoString.equals("correoCli")) {
+        } else if (nombreCampoString.equals("correo")) {
             Boolean result = CorreoValidation.validacionCorreo(campoEntregadoString);
-            if (result == false) {
-                return false;
+            if (result == true) {
+                return "Campo correcto";
             } else {
-                return true;
+                return "El correo no es valido";
             }
-        }else if(nombreCampoString.equals("claveCli")){
+        }else if(nombreCampoString.equals("clave")){
             Boolean result = ClaveValidation.ClaveValidate(campoEntregadoString);
-            if (result == false) {
-                return false;
+            if (result == true) {
+                return "Campo correcto";
             }else{
-                return true;
+                return "La clave no es valida";
             }
-        }else if(nombreCampoString.equals("celularCli")){
+        }else if(nombreCampoString.equals("celular")){
             Boolean result = CelularValidation.ValidateCelular(campoEntregadoString);
-            if (result == false) {
-                return false;
+            if (result == true) {
+                return "Campo correcto";
             }else{
-                return true;
+                return "El celular no es valido";
             }
         } else{
-            return true;
+            return "el campo no existe";
         }
     }
 }

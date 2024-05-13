@@ -29,12 +29,12 @@ public class AdminService {
     }
 
     //Obtiene un admin por el Rut.
-    public Optional<Admin> getAdminByRut(String rut_admin){
-        return adminRepository.findAdminByRutAdmin(rut_admin);
-    }
+    //public Optional<Admin> getAdminByRut(String rut_admin){
+       // return adminRepository.findAdminByRutAdmin(rut_admin);
+    //}
 
     //Obtiene un admin por el Correo.
-    public Optional<Admin> getAdminByCorreo(String correo_admin){
-        return adminRepository.findAdminBycorreoAdmin(correo_admin);
-    }
+    //public Optional<Admin> getAdminByCorreo(String correo_admin){
+      //  return adminRepository.findAdminBycorreoAdmin(correo_admin);
+   // }
 }

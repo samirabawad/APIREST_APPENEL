@@ -39,18 +39,18 @@ public class ClienteController {
     }
 
     //Obtiene un cliente por el Rut.
-    @GetMapping("getClienteRut/{rut_cliente}")
-    public ClienteDTO getClienteByRut(@PathVariable("rut_cliente") String rut_cliente) {
-        Optional<Cliente> cliente = clienteService.getClienteByRut(rut_cliente);
-        return cliente.map(UtilConversion::fromCliente).orElse(null);
-    }
+  //  @GetMapping("getClienteRut/{rut_cliente}")
+    //public ClienteDTO getClienteByRut(@PathVariable("rut_cliente") String rut_cliente) {
+      //  Optional<Cliente> cliente = clienteService.getClienteByRut(rut_cliente);
+  //      return cliente.map(UtilConversion::fromCliente).orElse(null);
+  //  }
 
     //Obtiene un cliente por correo.
-    @GetMapping("getClienteCorreo/{correo_cliente}")
-    public ClienteDTO getClienteByCorreo(@PathVariable("correo_cliente") String correo_cliente) {
-        Optional<Cliente> cliente = clienteService.getClienteByCorreo(correo_cliente);
-        return cliente.map(UtilConversion::fromCliente).orElse(null);
-    }
+  //  @GetMapping("getClienteCorreo/{correo_cliente}")
+    //public ClienteDTO getClienteByCorreo(@PathVariable("correo_cliente") String correo_cliente) {
+      //  Optional<Cliente> cliente = clienteService.getClienteByCorreo(correo_cliente);
+   //     return cliente.map(UtilConversion::fromCliente).orElse(null);
+    //}
 
     //crea un cliente
     @PostMapping("/crear")
