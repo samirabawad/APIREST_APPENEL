@@ -1,8 +1,11 @@
 package com.api.proyecto_enel.service;
 
+import com.api.proyecto_enel.model.DTO.AdminDTO;
+import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Admin;
 import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.repository.IAdminRepository;
+import com.api.proyecto_enel.util.IterateObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,25 +19,33 @@ public class AdminService {
     @Autowired
     IAdminRepository adminRepository;
 
-    //Obtiene una lista de todos los admins de la base de datos
-    public List<Admin> getAdmins(){
+    public List<Admin> getAdmins() {
         return adminRepository.findAll();
     }
 
-    //Obtiene un admin por el ID.
-    //0ptional permite manejar los valores nulos de la busqueda.
-    //Devuelve el valor en DTO.
     public Optional<Admin> getAdminById(Integer id_admin) {
         return adminRepository.findById(id_admin);
     }
 
-    //Obtiene un admin por el Rut.
-    //public Optional<Admin> getAdminByRut(String rut_admin){
-       // return adminRepository.findAdminByRutAdmin(rut_admin);
-    //}
+    //este sera para update solamente, no tiene registro.
+    public ResponseEntityDTO updateAdmin(AdminDTO adminDTO){
+        try {
+            //Itera y valida los campos del cliente enviado en la peticion.
+            String respuestaIteracion = IterateObject.IterateObjectDTO(adminDTO);
+            System.out.println("IDROL DE SAVECLIENTE: "+adminDTO.getIdrol());
+            if (respuestaIteracion.equals("Validaciones exitosas")) {
+                //guarda cliente
+                return new ResponseEntityDTO("Se guardara el admin", "200");
+            } else {
+                //Captura errores de validacion.
+                return new ResponseEntityDTO("Error al registrar el admin " + respuestaIteracion, "400");
+            }
 
-    //Obtiene un admin por el Correo.
-    //public Optional<Admin> getAdminByCorreo(String correo_admin){
-      //  return adminRepository.findAdminBycorreoAdmin(correo_admin);
-   // }
+            //Captura cualquier excepcion al iterar el cliente de la peticion.
+        } catch (Exception e) {
+            return new ResponseEntityDTO("Error al datos del registro.  Compruebe que el nombre de los campos y los valores sean los correctos", "400");
+        }
+    }
 }
+
+

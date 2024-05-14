@@ -26,26 +26,20 @@ public class ClienteService {
         return clienteRepository.findById(id_cliente);
     }
 
-    //Obtiene un cliente por el Rut
-    //  public Optional<Cliente> getClienteByRut(String rut_cliente) {
-    //    return clienteRepository.findByRut_cliente(rut_cliente);
-    // }
-
-    //Obtiene un cliente por el Correo
-    // public Optional<Cliente> getClienteByCorreo(String correo_cliente) {
-    //   return clienteRepository.findClienteByCorreo_cliente(correo_cliente);
-    // }
-    //falta verificar rango (por ejemplo, edad desde 18 a 150 años) y longitud del campo (en nombres y contrasenas)
-
-
     public ResponseEntityDTO saveCliente(ClienteDTO clienteDTO) {
         try {
             //Itera y valida los campos del cliente enviado en la peticion.
             String respuestaIteracion = IterateObject.IterateObjectDTO(clienteDTO);
-            System.out.println("IDROL DE SAVECLIENTE: "+clienteDTO.getIdrol());
             if (respuestaIteracion.equals("Validaciones exitosas")) {
                 //guarda cliente
-                return new ResponseEntityDTO("Se guardara el cliente", "200");
+                try{
+                    Cliente cliente = UtilConversion.toCliente(clienteDTO);
+                    clienteRepository.save(cliente);
+                    return new ResponseEntityDTO("Su usuario ha sido registrado correctamente", "200");
+                }catch(Exception e){
+                    System.out.println("Error: "+e.getMessage());
+                    return new ResponseEntityDTO("Error en la conversion de DTO a entity", "400");
+                }
             } else {
                 //Captura errores de validacion.
                 return new ResponseEntityDTO("Error al registrar el cliente. " + respuestaIteracion, "400");

@@ -15,15 +15,15 @@ public class AdminDTO {
 
      private Integer idrol;
 
-     private String rut_admin;
+     private String rut;
 
-     private String nombre_admin;
+     private String nombre;
 
-     private String apellido_admin;
+     private String apellido;
 
-     private String correo_admin;
+     private String correo;
 
-     private String clave_admin;
+     private String clave;
 
-     private String celular_admin;
+     private String celular;
 }

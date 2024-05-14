@@ -60,10 +60,17 @@ public class ValidacionPorCampo {
                 return "El celular no es valido";
             }
 
-        //Entrega resultado para campo que no tiene regla de validacion
+        }else if(nombreCampoString.equals("giro")){
+            Boolean result = StringValidation.IsOnlyAlphabetic(campoEntregadoString);
+            if(result.equals(true)){
+                return "Campo correcto";
+            }else{
+                return "El giro no es valido";
+            }
         }
+        //Entrega resultado para campo que no tiene regla de validacion
         else{
-            return "Este campo no tiene validacion";
+            return "Campo correcto";
         }
     }
 }

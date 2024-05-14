@@ -14,16 +14,16 @@ public class EmpresaDTO {
 
     private Integer idrol;
 
-    private String rut_empresa;
+    private String rut;
 
-    private String nombre_empresa;
+    private String nombre;
 
-    private String giro_empresa;
+    private String giro;
 
-    private String correo_empresa;
+    private String correo;
 
-    private String clave_empresa;
+    private String clave;
 
-    private String celular_empresa;
+    private String celular;
 
 }

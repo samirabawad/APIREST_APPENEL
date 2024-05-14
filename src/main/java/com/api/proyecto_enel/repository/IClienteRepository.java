@@ -14,4 +14,5 @@ public interface IClienteRepository extends JpaRepository<Cliente, Integer> {
     List<Cliente> findAllById(Iterable<Integer> integers);
   //  Optional<Cliente> findClienteByCorreo_cliente(String correo_cliente);
 //    Optional<Cliente> findByRut_cliente(String rut_cliente);
+
 }

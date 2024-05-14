@@ -54,11 +54,11 @@ public class ClienteController {
     //}
 
     //crea un cliente
-    @PostMapping("/crear")
+    @PostMapping("/registro/cliente")
     public ResponseEntityDTO saveCliente(@Valid @RequestBody ClienteDTO clienteDTO, BindingResult resultado) {
             ResponseEntityDTO cliente = clienteService.saveCliente(clienteDTO);
             if(resultado.hasErrors()){
-                return new ResponseEntityDTO("holi, error", "400");
+                return new ResponseEntityDTO("Ocurrió un error al intentar registrar el cliente", "400");
             }
             return cliente;
     }

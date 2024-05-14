@@ -1,8 +1,13 @@
 package com.api.proyecto_enel.service;
 
+import com.api.proyecto_enel.model.DTO.EmpresaDTO;
+import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.repository.IEmpresaRepository;
+import com.api.proyecto_enel.util.IterateObject;
+import com.api.proyecto_enel.util.UtilConversion;
+import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +26,53 @@ public class EmpresaService {
         return empresaRepository.findAll();
     }
 
-    //Obtiene una empresa por el ID.
-    //0ptional permite manejar los valores nulos de la busqueda
-    public Optional<Empresa> getEmpresaById(Integer id_empresa){
-        return empresaRepository.findById(id_empresa);
+    //Recuperaciones de claves
+    public Optional<Empresa> getEmpresaByRut(String rut_empresa){
+        return empresaRepository.findByRutEmpresa(rut_empresa);
+    }
+    public Optional<Empresa> getEmpresaByCorreo(String correo_empresa){
+        return empresaRepository.findByCorreo_empresa(correo_empresa);
+    }
+    public Optional<Empresa> getEmpresaByCelular(String celular_empresa){
+        return empresaRepository.findByCelular_empresa(celular_empresa);
     }
 
-    //Obtiene una empresa por el RUN.
-    //public Optional<Empresa> getEmpresaByRun(String run_empresa){
-      //  return empresaRepository.findEmpresaByRunEmpresa(run_empresa);
-   // }
+    //logins
+    public Optional<Empresa> getEmpresaByRutAndClave(String rut, String clave){
+        return empresaRepository.findByRutEmpresaAndClave_empresa(rut, clave);
+    }
+    public Optional<Empresa> getEmpresaByCelularAndClave(String celular, String clave){
+        return empresaRepository.findByCeular_empresaAndAndClave_empresa(celular, clave);
+    }
+    public Optional<Empresa> getEmpresaByCorreoAndClave(String correo, String clave){
+        return empresaRepository.findByCorreo_empresaAndAndClave_empresa(correo, clave);
+    }
 
-    //Obtiene una empresa por el Correo.
-   // public Optional<Empresa> getEmpresaByCorreo(String correo_empresa){
-     //   return empresaRepository.findEmpresaByCorreoEmpresa(correo_empresa);
-    //}
 
+
+
+    public ResponseEntityDTO saveEmpresa(EmpresaDTO empresaDTO){
+        try {
+            //Itera y valida los campos del cliente enviado en la peticion.
+            String respuestaIteracion = IterateObject.IterateObjectDTO(empresaDTO);
+            if (respuestaIteracion.equals("Validaciones exitosas")) {
+                //guarda cliente
+                try{
+                    Empresa empresa = UtilConversion.toEmpresa(empresaDTO);
+                    empresaRepository.save(empresa);
+                    return new ResponseEntityDTO("Su empresa se ha sido registrado correctamente", "200");
+                }catch(Exception e){
+                    System.out.println("Error: "+e.getMessage());
+                    return new ResponseEntityDTO("Error en la conversion de DTO a entity", "400");
+                }
+            } else {
+                //Captura errores de validacion.
+                return new ResponseEntityDTO("Error al registrar la empresa. " + respuestaIteracion, "400");
+            }
+
+            //Captura cualquier excepcion al iterar el cliente de la peticion.
+        } catch (Exception e) {
+            return new ResponseEntityDTO("Error al datos del registro.  Compruebe que el nombre de los campos y los valores sean los correctos", "400");
+        }
+    }
 }

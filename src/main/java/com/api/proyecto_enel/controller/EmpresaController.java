@@ -1,13 +1,17 @@
 package com.api.proyecto_enel.controller;
 
+import com.api.proyecto_enel.model.DTO.ClienteDTO;
 import com.api.proyecto_enel.model.DTO.EmpresaDTO;
+import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Cliente;
 import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.service.EmpresaService;
 import com.api.proyecto_enel.util.UtilConversion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,18 +40,31 @@ public class EmpresaController {
     //Obtiene una empresa por el ID.
     //0ptional permite manejar los valores nulos de la busqueda.
     //Devuelve el valor en DTO.
-    @GetMapping("getEmpresa/{id_empresa}")
-    public EmpresaDTO getEmpresaById(@PathVariable("id_empresa") Integer id_empresa){
-         Optional <Empresa> empresa = empresaService.getEmpresaById(id_empresa);
-         return empresa.map(UtilConversion::fromEmpresa).orElse(null);
+    //@GetMapping("get_empresa/{id}")
+    //public EmpresaDTO getEmpresaById(@PathVariable("id") Integer id){
+         //Optional <Empresa> empresa = empresaService.getEmpresaById(id);
+       //  return empresa.map(UtilConversion::fromEmpresa).orElse(null);
+    //}
+
+
+    //crea una empresa
+    @PostMapping("/registro/empresa")
+    public ResponseEntityDTO saveEmpresa(@Valid @RequestBody EmpresaDTO empresaDTO, BindingResult resultado) {
+        ResponseEntityDTO empresa = empresaService.saveEmpresa(empresaDTO);
+        if(resultado.hasErrors()){
+            return new ResponseEntityDTO("Ocurrió un error al intentar registrar la empresa", "400");
+        }
+        return empresa;
     }
 
-    //Obtiene una empresa por el Run.
-  //  @GetMapping("getEmpresa/{run_empresa}")
-    //public EmpresaDTO getEmpresaByRun(@PathVariable("run_empresa") String run_empresa) {
-      //  Optional <Empresa> empresa = empresaService.getEmpresaByRun(run_empresa);
-        //return empresa.map(UtilConversion::fromEmpresa).orElse(null);
-   // }
+    //Si prefieres seguir los principios de diseño RESTful, es posible que te inclines
+    // hacia @PathVariable, ya que tiende a proporcionar URLs más descriptivas y semánticamente significativas. Por ejemplo,
+    ///usuarios/{id} podría ser más legible que /login?correo=ejemplo@dominio.com&contrasena=1234.
+    //Login mediante metodo post
+    //@GetMapping
+    //public ResponseEntityDTO recuperaClaveRut(@RequestParam Integer id){
+
+    //}
 
     //Obtiene una empresa por el Correo.
     //@GetMapping("getEmpresa/{correo_empresa}")

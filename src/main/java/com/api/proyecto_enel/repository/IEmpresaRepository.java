@@ -14,6 +14,18 @@ public interface IEmpresaRepository extends JpaRepository<Empresa, Integer> {
     @Override
     List<Empresa> findAllById(Iterable<Integer> integers);
 
-    //Optional<Empresa> findEmpresaByRunEmpresa(String rutEmpresa);
-    //Optional<Empresa> findEmpresaByCorreoEmpresa(String correoEmpresa);
+
+    //recuperaciones de contrasena
+    Optional<Empresa> findByRutEmpresa(String rut);
+
+    Optional<Empresa> findByCorreo_empresa(String correo);
+
+    Optional<Empresa> findByCelular_empresa(String celular);
+
+    //logins
+    Optional<Empresa> findByCorreo_empresaAndAndClave_empresa(String correo, String clave);
+
+    Optional<Empresa> findByCeular_empresaAndAndClave_empresa(String correo, String clave);
+
+    Optional<Empresa> findByRutEmpresaAndClave_empresa(String rut, String clave);
 }
