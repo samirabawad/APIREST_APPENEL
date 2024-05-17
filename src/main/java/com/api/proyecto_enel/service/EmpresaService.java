@@ -26,29 +26,27 @@ public class EmpresaService {
         return empresaRepository.findAll();
     }
 
-    //Recuperaciones de claves
-    public Optional<Empresa> getEmpresaByRut(String rut_empresa){
-        return empresaRepository.findByRutEmpresa(rut_empresa);
-    }
-    public Optional<Empresa> getEmpresaByCorreo(String correo_empresa){
-        return empresaRepository.findByCorreo_empresa(correo_empresa);
-    }
-    public Optional<Empresa> getEmpresaByCelular(String celular_empresa){
-        return empresaRepository.findByCelular_empresa(celular_empresa);
-    }
-
-    //logins
-    public Optional<Empresa> getEmpresaByRutAndClave(String rut, String clave){
-        return empresaRepository.findByRutEmpresaAndClave_empresa(rut, clave);
-    }
-    public Optional<Empresa> getEmpresaByCelularAndClave(String celular, String clave){
-        return empresaRepository.findByCeular_empresaAndAndClave_empresa(celular, clave);
-    }
-    public Optional<Empresa> getEmpresaByCorreoAndClave(String correo, String clave){
-        return empresaRepository.findByCorreo_empresaAndAndClave_empresa(correo, clave);
+    public ResponseEntityDTO getEmpresaByCorreo(String correo_empresa) {
+        Optional<Empresa> empresa = empresaRepository.findByCorreoEmpresa(correo_empresa);
+        System.out.println(empresa.isPresent());
+        System.out.println(empresa);
+        if (empresa.isPresent()) {
+            return new ResponseEntityDTO("Se ha enviado un correo electronico para el cambio de su clave", "200");
+        }else{
+            return new ResponseEntityDTO("El correo electronico no se encuentra registrado", "400");
+        }
     }
 
-
+    public ResponseEntityDTO getEmpresaByCelular(String celular_empresa) {
+        Optional<Empresa> empresa = empresaRepository.findByCelularEmpresa(celular_empresa);
+        System.out.println(empresa.isPresent());
+        System.out.println(empresa);
+        if(empresa.isPresent()) {
+            return new ResponseEntityDTO("Se ha enviado un SMS para el cambio de su clave", "200");
+        }else{
+            return new ResponseEntityDTO("El celular no se encuentra registrado", "400");
+        }
+    }
 
 
     public ResponseEntityDTO saveEmpresa(EmpresaDTO empresaDTO){

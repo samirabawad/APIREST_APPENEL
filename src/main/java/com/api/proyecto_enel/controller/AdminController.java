@@ -1,6 +1,7 @@
 package com.api.proyecto_enel.controller;
 
 import com.api.proyecto_enel.model.DTO.AdminDTO;
+import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Admin;
 import com.api.proyecto_enel.service.AdminService;
 import com.api.proyecto_enel.util.UtilConversion;
@@ -33,27 +34,19 @@ public class AdminController {
                 .map(UtilConversion::fromAdmin)
                 .collect(Collectors.toList());
     }
-    //Obtiene un admin por el Rut.
-    //0ptional permite manejar los valores nulos de la busqueda.
-    //Devuelve el valor en DTO.
-    @GetMapping("getAdminId/{id_admin}")
-    public AdminDTO getAdminById(@PathVariable("id_admin") Integer id_admin) {
-        Optional<Admin> admin = adminService.getAdminById(id_admin);
-        return admin.map(UtilConversion::fromAdmin).orElse(null);
+    //envia correo electronico para la recuperacion de contrasena.
+    //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/admins/getAdminCorreo/2@gmail.cl
+    @GetMapping("/getAdminCorreo/{correo_admin}")
+    public ResponseEntityDTO getAdminCorreo(@PathVariable("correo_admin") String correo_admin) {
+        ResponseEntityDTO admin = adminService.getAdminByCorreo(correo_admin);
+        return admin;
     }
-
-    //Obtiene un admin por el Rut.
-    //@GetMapping("getAdminRut/{rut_admin}")
-    //public AdminDTO getAdminByRut(@PathVariable("rut_admin") String rut_admin) {
-      //  Optional<Admin> admin = adminService.getAdminByRut(rut_admin);
-       // return admin.map(UtilConversion::fromAdmin).orElse(null);
-    //}
-
-    //Obtiene un admin por el Correo.
-   // @GetMapping("getAdminCorreo/{correo_admin}")
-   // public AdminDTO getAdminByCorreo(@PathVariable("correo_admin") String correo_admin){
-       // Optional<Admin> admin = adminService.getAdminByCorreo(correo_admin);
-     //   return admin.map(UtilConversion::fromAdmin).orElse(null);
-  //  }
+    //envia SMS al celular para la recuperacion de contrasena.
+    //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/admins/getAdminCelular/99348741
+    @GetMapping("/getAdminCelular/{celular_admin}")
+    public ResponseEntityDTO getAdminCelular(@PathVariable("celular_admin") String celular_admin) {
+        ResponseEntityDTO admin = adminService.getAdminByCelular(celular_admin);
+        return admin;
+    }
 
 }

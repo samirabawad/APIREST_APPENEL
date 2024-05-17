@@ -22,10 +22,28 @@ public class AdminService {
     public List<Admin> getAdmins() {
         return adminRepository.findAll();
     }
-
-    public Optional<Admin> getAdminById(Integer id_admin) {
-        return adminRepository.findById(id_admin);
+    public ResponseEntityDTO getAdminByCorreo(String correo_admin) {
+        Optional<Admin> admin = adminRepository.findByCorreoAdmin(correo_admin);
+        System.out.println(admin.isPresent());
+        System.out.println(admin);
+        if (admin.isPresent()) {
+            return new ResponseEntityDTO("Se ha enviado un correo electronico para el cambio de su clave", "200");
+        }else{
+            return new ResponseEntityDTO("El correo electronico no se encuentra registrado", "400");
+        }
     }
+
+    public ResponseEntityDTO getAdminByCelular(String celular_admin) {
+        Optional<Admin> admin = adminRepository.findByCelularAdmin(celular_admin);
+        System.out.println(admin.isPresent());
+        System.out.println(admin);
+        if(admin.isPresent()) {
+            return new ResponseEntityDTO("Se ha enviado un SMS para el cambio de su clave", "200");
+        }else{
+            return new ResponseEntityDTO("El celular no se encuentra registrado", "400");
+        }
+    }
+
 
     //este sera para update solamente, no tiene registro.
     public ResponseEntityDTO updateAdmin(AdminDTO adminDTO){

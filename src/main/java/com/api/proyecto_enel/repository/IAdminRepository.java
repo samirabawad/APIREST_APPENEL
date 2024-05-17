@@ -3,6 +3,8 @@ package com.api.proyecto_enel.repository;
 import com.api.proyecto_enel.model.entity.Admin;
 import com.api.proyecto_enel.model.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,10 @@ public interface IAdminRepository extends JpaRepository<Admin, Integer> {
     @Override
     List<Admin> findAllById(Iterable<Integer> integers);
 
-    //Optional<Admin> findAdminByRutAdmin(String rutAdmin);
-    //Optional<Admin> findAdminBycorreoAdmin(String correoAdmin);
+    @Query("SELECT e FROM Admin e WHERE e.correo_admin =:correo_admin")
+    Optional<Admin> findByCorreoAdmin(@Param("correo_admin") String correo_admin);
+
+    @Query("SELECT e FROM Admin e WHERE e.celular_admin =:celular_admin")
+    Optional<Admin> findByCelularAdmin(@Param("celular_admin") String celular_admin);
+
 }

@@ -36,16 +36,21 @@ public class EmpresaController {
                 .map(UtilConversion::fromEmpresa)
                 .collect(Collectors.toList());
     }
-
-    //Obtiene una empresa por el ID.
-    //0ptional permite manejar los valores nulos de la busqueda.
-    //Devuelve el valor en DTO.
-    //@GetMapping("get_empresa/{id}")
-    //public EmpresaDTO getEmpresaById(@PathVariable("id") Integer id){
-         //Optional <Empresa> empresa = empresaService.getEmpresaById(id);
-       //  return empresa.map(UtilConversion::fromEmpresa).orElse(null);
-    //}
-
+    //envia correo electronico para la recuperacion de contrasena.
+    //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/empresas/getEmpresaCorreo/2@gmail.cl
+    @GetMapping("/getEmpresaCorreo/{correo_empresa}")
+    public ResponseEntityDTO getEmpresaCorreo(@PathVariable("correo_empresa") String correo_empresa) {
+        ResponseEntityDTO empresa = empresaService.getEmpresaByCorreo(correo_empresa);
+        return empresa;
+    }
+    
+    //envia SMS al celular para la recuperacion de contrasena.
+    //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/empresas/getEmpresaCelular/99348741
+    @GetMapping("/getEmpresaCelular/{celular_empresa}")
+    public ResponseEntityDTO getEmpresaCelular(@PathVariable("celular_empresa") String celular_empresa) {
+        ResponseEntityDTO empresa = empresaService.getEmpresaByCelular(celular_empresa);
+        return empresa;
+    }
 
     //crea una empresa
     @PostMapping("/registro/empresa")
@@ -56,21 +61,5 @@ public class EmpresaController {
         }
         return empresa;
     }
-
-    //Si prefieres seguir los principios de diseño RESTful, es posible que te inclines
-    // hacia @PathVariable, ya que tiende a proporcionar URLs más descriptivas y semánticamente significativas. Por ejemplo,
-    ///usuarios/{id} podría ser más legible que /login?correo=ejemplo@dominio.com&contrasena=1234.
-    //Login mediante metodo post
-    //@GetMapping
-    //public ResponseEntityDTO recuperaClaveRut(@RequestParam Integer id){
-
-    //}
-
-    //Obtiene una empresa por el Correo.
-    //@GetMapping("getEmpresa/{correo_empresa}")
-   // public EmpresaDTO getEmpresaByCorreo(@PathVariable("correo_empresa") String correo_empresa){
-     //   Optional<Empresa> empresa = empresaService.getEmpresaByCorreo(correo_empresa);
-       // return empresa.map(UtilConversion::fromEmpresa).orElse(null);
-    //}
 
 }
