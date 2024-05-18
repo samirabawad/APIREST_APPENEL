@@ -21,14 +21,6 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    //obtiene a todos los clientes
-    //stream() crea una secuencia de elementos para ser procesados de manera secuencial.
-    //map() convierte cada elemento DTO a entidad
-    //collect() convierte el resultado en una lista.
-    @GetMapping("clientes")
-    public List<ClienteDTO> getAllClientes() {
-        return clienteService.getClientes();
-    }
 
     //envia correo electronico para la recuperacion de contrasena.
     //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/clientes/getClienteCorreo/2@gmail.cl

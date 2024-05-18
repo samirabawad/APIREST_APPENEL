@@ -27,16 +27,6 @@ public class ClienteService {
 
 
 
-
-    //Entrega una lista de todas las empresas
-    public List<ClienteDTO> getClientes(){
-        List<Cliente> clientes = clienteRepository.findAll();
-        return clientes.stream()
-                .map(UtilConversion::fromCliente)
-                .collect(Collectors.toList());
-
-    }
-
     //Obtiene cliente por ID. Si no existe, se maneja el nulo con Optional
     public Optional<Cliente> getClienteById(Integer id_cliente) {
         return clienteRepository.findById(id_cliente);

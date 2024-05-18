@@ -26,15 +26,6 @@ public class EmpresaService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    //Entrega una lista de todas las empresas
-    public List<EmpresaDTO> getEmpresas(){
-        List<Empresa> empresas = empresaRepository.findAll();
-        return empresas.stream()
-                .map(UtilConversion::fromEmpresa)
-                .collect(Collectors.toList());
-
-    }
-
     public ResponseEntityDTO getEmpresaByCorreo(String correo_empresa) {
         Optional<Empresa> empresa = empresaRepository.findByCorreoEmpresa(correo_empresa);
         System.out.println(empresa.isPresent());
