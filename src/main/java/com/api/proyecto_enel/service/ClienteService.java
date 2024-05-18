@@ -7,6 +7,8 @@ import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.repository.IClienteRepository;
 import com.api.proyecto_enel.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -19,6 +21,11 @@ public class ClienteService {
     //Inyecta instancia repositorioCliente
     @Autowired
     IClienteRepository clienteRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
 
 
     //Entrega una lista de todas las empresas
@@ -69,7 +76,9 @@ public class ClienteService {
                        // return new ResponseEntityDTO("Ocurrió un error al guardar su clave", "200");
                     //}else{
                         //clienteDTO.setClave(claveHash);
-                        Cliente cliente = UtilConversion.toCliente(clienteDTO);
+                    String hashedPassword = passwordEncoder.encode(clienteDTO.getClave());
+                    clienteDTO.setClave(hashedPassword);
+                    Cliente cliente = UtilConversion.toCliente(clienteDTO);
                         clienteRepository.save(cliente);
                         return new ResponseEntityDTO("Su usuario ha sido registrado correctamente", "200");
             //        }

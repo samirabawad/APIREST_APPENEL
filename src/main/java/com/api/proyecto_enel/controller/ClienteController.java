@@ -25,7 +25,7 @@ public class ClienteController {
     //stream() crea una secuencia de elementos para ser procesados de manera secuencial.
     //map() convierte cada elemento DTO a entidad
     //collect() convierte el resultado en una lista.
-    @GetMapping("clientes/")
+    @GetMapping("clientes")
     public List<ClienteDTO> getAllClientes() {
         return clienteService.getClientes();
     }
