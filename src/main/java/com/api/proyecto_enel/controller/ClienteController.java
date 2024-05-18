@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path="clientes")
+@RequestMapping()
 public class ClienteController {
     //Inyeccion de la instancia de IClienteRepository en el controlador
     @Autowired
@@ -25,21 +25,21 @@ public class ClienteController {
     //stream() crea una secuencia de elementos para ser procesados de manera secuencial.
     //map() convierte cada elemento DTO a entidad
     //collect() convierte el resultado en una lista.
-    @GetMapping
+    @GetMapping("clientes/")
     public List<ClienteDTO> getAllClientes() {
         return clienteService.getClientes();
     }
 
     //envia correo electronico para la recuperacion de contrasena.
     //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/clientes/getClienteCorreo/2@gmail.cl
-    @GetMapping("/getClienteCorreo/{correo_cliente}")
+    @GetMapping("clientes/getClienteCorreo/{correo_cliente}")
     public ResponseEntityDTO getClienteCorreo(@PathVariable("correo_cliente") String correo_cliente) {
             ResponseEntityDTO cliente = clienteService.getClienteByCorreo(correo_cliente);
             return cliente;
     }
     //envia SMS al celular para la recuperacion de contrasena.
     //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/clientes/getClienteCelular/99348741
-    @GetMapping("/getClienteCelular/{celular_cliente}")
+    @GetMapping("clientes/getClienteCelular/{celular_cliente}")
     public ResponseEntityDTO getClienteCelular(@PathVariable("celular_cliente") String celular_cliente) {
         ResponseEntityDTO cliente = clienteService.getClienteByCelular(celular_cliente);
         return cliente;
