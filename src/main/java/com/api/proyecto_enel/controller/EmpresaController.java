@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "api/v1/empresas")
+@RequestMapping(path = "empresas")
 public class EmpresaController {
 
     //Inyeccion de la instancia de IEmpresaRepository en el controlador

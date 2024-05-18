@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path="api/v1/admins")
+@RequestMapping(path="admins")
 public class AdminController {
     //Inyeccion de la instancia de IAdminRepository en el controlador
 
