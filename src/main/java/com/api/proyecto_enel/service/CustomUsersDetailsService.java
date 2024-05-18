@@ -27,27 +27,27 @@ public class CustomUsersDetailsService implements UserDetailsService {
     private IEmpresaRepository empresaRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Admin> adminOptional = adminRepository.findByCorreoAdmin(email);
-        Optional<Cliente> clienteOptional = clienteRepository.findByCorreoCliente(email);
-        Optional<Empresa> empresaOptional = empresaRepository.findByCorreoEmpresa(email);
+    public UserDetails loadUserByUsername(String rut) throws UsernameNotFoundException {
+        Optional<Admin> adminOptional = adminRepository.findByRutAdmin(rut);
+        Optional<Cliente> clienteOptional = clienteRepository.findByRutCliente(rut);
+        Optional<Empresa> empresaOptional = empresaRepository.findByRutEmpresa(rut);
 
         if (adminOptional.isPresent()) {
             Admin admin = adminOptional.get();
-            return buildUserDetails(admin.getCorreo_admin(), admin.getClave_admin(), "ADMIN");
+            return buildUserDetails(admin.getRut_admin(), admin.getClave_admin(), "ADMIN");
         } else if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
-            return buildUserDetails(cliente.getCorreo_cliente(), cliente.getClave_cliente(), "CLIENTE");
+            return buildUserDetails(cliente.getRut_cliente(), cliente.getClave_cliente(), "CLIENTE");
         } else if (empresaOptional.isPresent()) {
             Empresa empresa = empresaOptional.get();
-            return buildUserDetails(empresa.getCorreo_empresa(), empresa.getClave_empresa(), "EMPRESA");
+            return buildUserDetails(empresa.getRut_empresa(), empresa.getClave_empresa(), "EMPRESA");
         } else {
-            throw new UsernameNotFoundException("No se encontró ningún usuario con el correo electrónico: " + email);
+            throw new UsernameNotFoundException("No se encontró ningún usuario con el RUT: " + rut);
         }
     }
 
-    private UserDetails buildUserDetails(String email, String password, String role) {
-        return User.withUsername(email)
+    private UserDetails buildUserDetails(String rut, String password, String role) {
+        return User.withUsername(rut)
                 .password(password)
                 .roles(role)
                 .build();

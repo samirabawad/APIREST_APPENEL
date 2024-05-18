@@ -9,6 +9,7 @@ import com.api.proyecto_enel.util.IterateObject;
 import com.api.proyecto_enel.util.UtilConversion;
 import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public class EmpresaService {
     //inyectando instancia de repositorio de empresa.
     @Autowired
     IEmpresaRepository empresaRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     //Entrega una lista de todas las empresas
     public List<EmpresaDTO> getEmpresas(){
@@ -66,6 +70,8 @@ public class EmpresaService {
                    //     return new ResponseEntityDTO("Ocurrió un error al guardar su clave", "200");
                   //  }else{
                     //    empresaDTO.setClave(claveHash);
+                        String hashedPassword = passwordEncoder.encode(empresaDTO.getClave());
+                        empresaDTO.setClave(hashedPassword);
                         Empresa empresa = UtilConversion.toEmpresa(empresaDTO);
                         empresaRepository.save(empresa);
                         return new ResponseEntityDTO("Su empresa se ha sido registrado correctamente", "200");

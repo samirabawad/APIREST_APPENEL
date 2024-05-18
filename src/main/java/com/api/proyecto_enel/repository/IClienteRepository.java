@@ -16,6 +16,9 @@ public interface IClienteRepository extends JpaRepository<Cliente, Integer> {
     @Override
     List<Cliente> findAllById(Iterable<Integer> integers);
 
+    @Query("SELECT e FROM Cliente e WHERE e.rut_cliente =:rut_cliente")
+    Optional<Cliente> findByRutCliente(@Param("rut_cliente") String rut_cliente);
+
     @Query("SELECT e FROM Cliente e WHERE e.correo_cliente =:correo_cliente")
     Optional<Cliente> findByCorreoCliente(@Param("correo_cliente") String correo_cliente);
 

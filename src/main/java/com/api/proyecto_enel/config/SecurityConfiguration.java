@@ -26,10 +26,10 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry-> {
-                    registry.requestMatchers("/registro/cliente").permitAll();
+                    registry.requestMatchers("/registro/**").permitAll();
                     registry.requestMatchers("/clientes/**").hasRole("CLIENTE");
                     registry.requestMatchers("/admins/**").hasRole("ADMIN");
-                    registry.requestMatchers("/empresas/**").hasRole("EMPRESAS");
+                    registry.requestMatchers("/empresas/**").hasRole("EMPRESA");
                     registry.anyRequest().authenticated();
                 })
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)

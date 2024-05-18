@@ -2,6 +2,7 @@ package com.api.proyecto_enel.repository;
 
 import com.api.proyecto_enel.model.entity.Admin;
 import com.api.proyecto_enel.model.entity.Cliente;
+import com.api.proyecto_enel.model.entity.Empresa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +17,9 @@ public interface IAdminRepository extends JpaRepository<Admin, Integer> {
     //JPA provee las funciones de consulta a la bd implicitamente como: finAll(), findBy(), etc.
     @Override
     List<Admin> findAllById(Iterable<Integer> integers);
+
+    @Query("SELECT e FROM Admin e WHERE e.rut_admin =:rut_admin")
+    Optional<Admin> findByRutAdmin(@Param("rut_admin") String rut_admin);
 
     @Query("SELECT e FROM Admin e WHERE e.correo_admin =:correo_admin")
     Optional<Admin> findByCorreoAdmin(@Param("correo_admin") String correo_admin);

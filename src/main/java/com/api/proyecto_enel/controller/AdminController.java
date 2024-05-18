@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path="admins")
+@RequestMapping()
 public class AdminController {
     //Inyeccion de la instancia de IAdminRepository en el controlador
 
@@ -27,7 +27,7 @@ public class AdminController {
     //stream() crea una secuencia de elementos para ser procesados de manera secuencial.
     //map() convierte cada elemento DTO a entidad
     //collect() convierte el resultado en una lista.
-    @GetMapping
+    @GetMapping("admins")
     public List<AdminDTO> getAllAdmins() {
         List<Admin> admins = adminService.getAdmins();
         return admins.stream()
@@ -36,14 +36,14 @@ public class AdminController {
     }
     //envia correo electronico para la recuperacion de contrasena.
     //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/admins/getAdminCorreo/2@gmail.cl
-    @GetMapping("/getAdminCorreo/{correo_admin}")
+    @GetMapping("admins/getAdminCorreo/{correo_admin}")
     public ResponseEntityDTO getAdminCorreo(@PathVariable("correo_admin") String correo_admin) {
         ResponseEntityDTO admin = adminService.getAdminByCorreo(correo_admin);
         return admin;
     }
     //envia SMS al celular para la recuperacion de contrasena.
     //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/admins/getAdminCelular/99348741
-    @GetMapping("/getAdminCelular/{celular_admin}")
+    @GetMapping("admins/getAdminCelular/{celular_admin}")
     public ResponseEntityDTO getAdminCelular(@PathVariable("celular_admin") String celular_admin) {
         ResponseEntityDTO admin = adminService.getAdminByCelular(celular_admin);
         return admin;

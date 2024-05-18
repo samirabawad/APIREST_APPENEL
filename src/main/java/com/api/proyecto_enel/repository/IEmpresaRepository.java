@@ -18,6 +18,9 @@ public interface IEmpresaRepository extends JpaRepository<Empresa, Integer> {
     @Override
     List<Empresa> findAllById(Iterable<Integer> integers);
 
+    @Query("SELECT e FROM Empresa e WHERE e.rut_empresa =:rut_empresa")
+    Optional<Empresa> findByRutEmpresa(@Param("rut_empresa") String rut_empresa);
+
     @Query("SELECT e FROM Empresa e WHERE e.correo_empresa =:correo_empresa")
     Optional<Empresa> findByCorreoEmpresa(@Param("correo_empresa") String correo_empresa);
 
