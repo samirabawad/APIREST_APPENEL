@@ -31,11 +31,8 @@ public class EmpresaController {
     //collect() convierte el resultado en una lista.
     @GetMapping
     public List<EmpresaDTO> getAllEmpresas() {
-        List<Empresa> empresas = empresaService.getEmpresas();
-        return empresas.stream()
-                .map(UtilConversion::fromEmpresa)
-                .collect(Collectors.toList());
-    }
+        return empresaService.getEmpresas();
+}
     //envia correo electronico para la recuperacion de contrasena.
     //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/empresas/getEmpresaCorreo/2@gmail.cl
     @GetMapping("/getEmpresaCorreo/{correo_empresa}")
@@ -43,7 +40,7 @@ public class EmpresaController {
         ResponseEntityDTO empresa = empresaService.getEmpresaByCorreo(correo_empresa);
         return empresa;
     }
-    
+
     //envia SMS al celular para la recuperacion de contrasena.
     //Recibe correo del cliente mediante URL, ejemplo: http://localhost:8080/api/v1/empresas/getEmpresaCelular/99348741
     @GetMapping("/getEmpresaCelular/{celular_empresa}")

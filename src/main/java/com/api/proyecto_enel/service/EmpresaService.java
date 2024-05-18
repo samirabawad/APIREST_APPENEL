@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpresaService {
@@ -21,9 +22,13 @@ public class EmpresaService {
     @Autowired
     IEmpresaRepository empresaRepository;
 
-    //obtiene una lista de todos los empresa de la base de datos
-    public List<Empresa> getEmpresas(){
-        return empresaRepository.findAll();
+    //Entrega una lista de todas las empresas
+    public List<EmpresaDTO> getEmpresas(){
+        List<Empresa> empresas = empresaRepository.findAll();
+        return empresas.stream()
+                .map(UtilConversion::fromEmpresa)
+                .collect(Collectors.toList());
+
     }
 
     public ResponseEntityDTO getEmpresaByCorreo(String correo_empresa) {
@@ -56,10 +61,16 @@ public class EmpresaService {
             if (respuestaIteracion.equals("Validaciones exitosas")) {
                 //guarda cliente
                 try{
-                    Empresa empresa = UtilConversion.toEmpresa(empresaDTO);
-                    empresaRepository.save(empresa);
-                    return new ResponseEntityDTO("Su empresa se ha sido registrado correctamente", "200");
-                }catch(Exception e){
+               //     String claveHash = HashingPassword.hashPassword(empresaDTO.getClave());
+                 //   if (claveHash.equals("NO HASH")){
+                   //     return new ResponseEntityDTO("Ocurrió un error al guardar su clave", "200");
+                  //  }else{
+                    //    empresaDTO.setClave(claveHash);
+                        Empresa empresa = UtilConversion.toEmpresa(empresaDTO);
+                        empresaRepository.save(empresa);
+                        return new ResponseEntityDTO("Su empresa se ha sido registrado correctamente", "200");
+
+                 }catch(Exception e){
                     System.out.println("Error: "+e.getMessage());
                     return new ResponseEntityDTO("Error en la conversion de DTO a entity", "400");
                 }

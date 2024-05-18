@@ -25,10 +25,7 @@ public class ClienteController {
     //collect() convierte el resultado en una lista.
     @GetMapping
     public List<ClienteDTO> getAllClientes() {
-        List<Cliente> clientes = clienteService.getClientes();
-        return clientes.stream()
-                .map(UtilConversion::fromCliente)
-                .collect(Collectors.toList());
+        return clienteService.getClientes();
     }
 
     //envia correo electronico para la recuperacion de contrasena.

@@ -1,7 +1,9 @@
 package com.api.proyecto_enel.service;
 import com.api.proyecto_enel.model.DTO.ClienteDTO;
+import com.api.proyecto_enel.model.DTO.EmpresaDTO;
 import com.api.proyecto_enel.model.DTO.ResponseEntityDTO;
 import com.api.proyecto_enel.model.entity.Cliente;
+import com.api.proyecto_enel.model.entity.Empresa;
 import com.api.proyecto_enel.repository.IClienteRepository;
 import com.api.proyecto_enel.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.swing.text.html.Option;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -17,9 +20,14 @@ public class ClienteService {
     @Autowired
     IClienteRepository clienteRepository;
 
-    //Obtiene todos los clientes
-    public List<Cliente> getClientes() {
-        return clienteRepository.findAll();
+
+    //Entrega una lista de todas las empresas
+    public List<ClienteDTO> getClientes(){
+        List<Cliente> clientes = clienteRepository.findAll();
+        return clientes.stream()
+                .map(UtilConversion::fromCliente)
+                .collect(Collectors.toList());
+
     }
 
     //Obtiene cliente por ID. Si no existe, se maneja el nulo con Optional
@@ -56,10 +64,16 @@ public class ClienteService {
             if (respuestaIteracion.equals("Validaciones exitosas")) {
                 //guarda cliente
                 try{
-                    Cliente cliente = UtilConversion.toCliente(clienteDTO);
-                    clienteRepository.save(cliente);
-                    return new ResponseEntityDTO("Su usuario ha sido registrado correctamente", "200");
-                }catch(Exception e){
+                    //String claveHash = HashingPassword.hashPassword(clienteDTO.getClave());
+                    //if (claveHash.equals("NO HASH")){
+                       // return new ResponseEntityDTO("Ocurrió un error al guardar su clave", "200");
+                    //}else{
+                        //clienteDTO.setClave(claveHash);
+                        Cliente cliente = UtilConversion.toCliente(clienteDTO);
+                        clienteRepository.save(cliente);
+                        return new ResponseEntityDTO("Su usuario ha sido registrado correctamente", "200");
+            //        }
+            }catch(Exception e){
                     System.out.println("Error: "+e.getMessage());
                     return new ResponseEntityDTO("Error en la conversion de DTO a entity", "400");
                 }
